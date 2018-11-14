@@ -7,7 +7,7 @@ clear;
 % option
 % 1 = LKTest1im
 % 2 = Toys
-option = 2;
+option = 1;
 
 % setNumber
 % For LKTest1im
@@ -17,7 +17,7 @@ option = 2;
 % For Toys
 % 1 = toys1 & toys2
 % 2 = toys21 & toys22
-setNumber = 1;
+setNumber = 3;
 
 filter_sigma = 1.4;
 Window_size = 5;
@@ -141,3 +141,9 @@ for img_scale = 1:3
     clear hsv;
     clear angle;
 end
+
+for fig_num = 1:6
+    filename = sprintf('%i-%i-%i.png',option,setNumber,fig_num);
+    saveas(fig_num,filename);
+end
+
