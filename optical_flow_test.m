@@ -7,7 +7,7 @@ clear;
 % option
 % 1 = LKTest1im
 % 2 = Toys
-option = 1;
+option = 2;
 
 % setNumber
 % For LKTest1im
@@ -17,7 +17,7 @@ option = 1;
 % For Toys
 % 1 = toys1 & toys2
 % 2 = toys21 & toys22
-setNumber = 3;
+setNumber = 1;
 
 filter_sigma = 1.4;
 Window_size = 5;
@@ -47,7 +47,7 @@ for img_scale = 1:3
     magnitude = zeros(image1_dim(1),image1_dim(2));
     
     % Gradient of image 2
-    [Ix,Iy] = imgradient(double(image2),'prewitt');
+    [Ix,Iy] = imgradientxy(double(image2),'prewitt');
     
     % Temporal gradient
     It = double(image2-image1);
