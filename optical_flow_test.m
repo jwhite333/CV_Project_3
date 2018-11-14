@@ -29,6 +29,11 @@ inputImage2 = original_img2;
 
 for img_scale = 1:3
 
+    figure(5 * img_scale - 4)
+    imshow(inputImage1);
+    figure(5 * img_scale - 3)
+    imshow(inputImage2);
+    
     % Load images (Saved as grayscale so no conversion necessary)
     image1 = imgaussfilt(inputImage1,filter_sigma);
     image2 = imgaussfilt(inputImage2,filter_sigma);
@@ -50,8 +55,8 @@ for img_scale = 1:3
     It = double(image2-image1);
     
     % Loop through pixels on image
-    figure(4 * img_scale - 1);
-    imshow(image2);
+    figure(5 * img_scale - 2);
+    imshow(inputImage2);
     hold on;
     W_center = ceil(Window_size/2.0);
     for x = W_center:(image2_dim(1)-W_center)+1
@@ -90,7 +95,7 @@ for img_scale = 1:3
     end
     
     % Show quiver plot
-    figure(4*img_scale-3);
+    figure(5*img_scale-1);
     [x,y] = meshgrid(1:image2_dim(2),1:image2_dim(1));
     u = cos(angle(:,:)).*magnitude(:,:);
     v = sin(angle(:,:)).*magnitude(:,:);
@@ -120,12 +125,11 @@ for img_scale = 1:3
         end
     end
 
-    figure(4 * img_scale);
+    figure(5 * img_scale);
     imshow(color_image);
     
     inputImage1 = impyramid(inputImage1, 'reduce');
     inputImage2 = impyramid(inputImage2, 'reduce');
     clear hsv;
     clear angle;
-    clear ones;
 end
