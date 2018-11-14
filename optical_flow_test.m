@@ -27,6 +27,9 @@ Window_size = 5;
 inputImage1 = original_img1;
 inputImage2 = original_img2;
 
+% Keep track of figures
+figure_number = 1;
+
 for img_scale = 1:3
 
     figure(5 * img_scale - 4)
@@ -55,9 +58,6 @@ for img_scale = 1:3
     It = double(image2-image1);
     
     % Loop through pixels on image
-    figure(5 * img_scale - 2);
-    imshow(inputImage2);
-    hold on;
     W_center = ceil(Window_size/2.0);
     for x = W_center:(image2_dim(1)-W_center)+1
         for y = W_center:(image2_dim(2)-W_center)+1
@@ -88,6 +88,11 @@ for img_scale = 1:3
                 % Find the magntidue
                 magnitude(x,y) = sqrt(v(1,1)^2 + v(2,1)^2);
                 
+                % Don't allow obvious errors that ruin the quiver plot
+                if magnitude(x,y) > min(image2_dim)
+                    magnitude(x,y) = min(image2_dim);
+                end
+                
                 %Find the angle
                 angle(x,y) = atan2d(v(2,1), v(1,1));
             end
@@ -95,11 +100,18 @@ for img_scale = 1:3
     end
     
     % Show quiver plot
-    figure(5*img_scale-1);
+    figure(figure_number);
     [x,y] = meshgrid(1:image2_dim(2),1:image2_dim(1));
     u = cos(angle(:,:)).*magnitude(:,:);
     v = sin(angle(:,:)).*magnitude(:,:);
-    quiver(x,y,u,v, 'color', [1,0,0],'Marker','.');
+    quiver(x,y,u,v, 'color', [1,0,0],'AutoScale','off');
+    hold on
+    title_str = sprintf("Optical flow vectors for image at scale factor 1/%i",2^(img_scale-1));
+    title(title_str);
+    xlabel("X");
+    ylabel("Y");
+    hold off
+    figure_number = figure_number+1;
     
     % Normalize values
     min_angle = min(min(angle));
@@ -125,8 +137,9 @@ for img_scale = 1:3
         end
     end
 
-    figure(5 * img_scale);
+    figure(figure_number);
     imshow(color_image);
+    figure_number = figure_number + 1;
     
     inputImage1 = impyramid(inputImage1, 'reduce');
     inputImage2 = impyramid(inputImage2, 'reduce');
