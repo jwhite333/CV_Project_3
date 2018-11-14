@@ -17,7 +17,7 @@ switch option
         if (setNumber == 1)
             path1 = 'images/toys1.gif';
             path2 = 'images/toys2.gif';
-        elseif (SetNumber == 2)
+        elseif (setNumber == 2)
             path1 = 'images/toys21.gif';
             path2 = 'images/toys22.gif';
         else

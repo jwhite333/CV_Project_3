@@ -7,7 +7,7 @@ clear;
 % option
 % 1 = LKTest1im
 % 2 = Toys
-option = 1;
+option = 2;
 
 % setNumber
 % For LKTest1im
@@ -30,7 +30,7 @@ for index = 1:3
     
     
     filter_sigma = 1.4;
-    Window_size = 20;
+    Window_size = 5;
     W_sigma = 7;
     W_weights = fspecial('gaussian',Window_size^2,W_sigma);
     W = diag(diag(W_weights));
@@ -51,7 +51,7 @@ for index = 1:3
     magnitude = zeros(image1_dim(1),image1_dim(2));
     
     % Gradient of image 2
-    [Ix,Iy] = imgradient(image2);
+    [Ix,Iy] = imgradient(double(image2),'prewitt');
     
     % Temporal gradient
     It = int8(image2-image1);
