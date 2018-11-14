@@ -17,7 +17,7 @@ option = 1;
 % For Toys
 % 1 = toys1 & toys2
 % 2 = toys21 & toys22
-setNumber = 2;
+setNumber = 3;
 
 filter_sigma = 1.4;
 Window_size = 5;
@@ -96,7 +96,7 @@ for img_scale = 1:3
     
     % Show quiver plot
     figure(figure_number);
-    [x,y] = meshgrid(1:image2_dim(2),1:image2_dim(1));
+    [x,y] = meshgrid(1:image2_dim(2),image2_dim(1):-1:1);
     u = cos(angle(:,:)).*magnitude(:,:);
     v = sin(angle(:,:)).*magnitude(:,:);
     quiver(x,y,u,v, 'color', [1,0,0],'AutoScale','off');
