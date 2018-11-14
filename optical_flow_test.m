@@ -31,11 +31,6 @@ inputImage2 = original_img2;
 figure_number = 1;
 
 for img_scale = 1:3
-
-    figure(5 * img_scale - 4)
-    imshow(inputImage1);
-    figure(5 * img_scale - 3)
-    imshow(inputImage2);
     
     % Load images (Saved as grayscale so no conversion necessary)
     image1 = imgaussfilt(inputImage1,filter_sigma);
